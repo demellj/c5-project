@@ -1,0 +1,18 @@
+version: "3"
+services:
+  c5-project-rust-build:
+    build:
+      context: ../backend/
+    image: c5-project-rust-build
+  c5-project-api-base:
+    build:
+      context: ../backend/base
+    image: c5-project-api-base
+  c5-project-reverseproxy:
+    build:
+      context: ../backend/reverseproxy
+    image: c5-project-reverseproxy
+#  c5-project-frontend:
+#    build:
+#      context: ../frontend
+#    image: c5-project-frontend

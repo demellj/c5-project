@@ -1,0 +1,14 @@
+version: "3"
+services:
+  c5-project-api-user:
+    build:
+      context: ../backend/users
+    image: c5-project-api-user
+  c5-project-api-feed:
+    build:
+      context: ../backend/feed
+    image: c5-project-api-feed
+  c5-project-imgproc:
+    build:
+      context: ../backend/imgproc
+    image: c5-project-imgproc

@@ -1,0 +1,27 @@
+version: "3"
+services:
+  reverseproxy:
+    image: c5-project-reverseproxy
+    ports:
+      - 8080:8080
+    restart: always
+    depends_on:
+      - backend-user
+      - backend-feed
+  backend-user:
+    image: c5-project-api-user
+    env_file: ../.env
+  backend-feed:
+    image: c5-project-api-feed
+    volumes:
+      - $HOME/.aws:/home/appuser/.aws
+    env_file: ../.env
+  backend-imgproc:
+    image: c5-project-imgproc
+    volumes:
+      - $HOME/.aws:/home/appuser/.aws
+    env_file: ../.env
+#  frontend:
+#    image: c5-project-frontend
+#    ports:
+#      - "8100:80"
