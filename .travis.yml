@@ -1,0 +1,32 @@
+language: node_js
+node_js:
+  - 13
+
+services:
+  - docker
+
+# Pre-testing installs
+install:
+  - echo "nothing needs to be installed"
+
+# Scripts to be run such as tests
+before_script:
+  - echo "no tests"
+
+script:
+  - docker --version # print the version for logging
+  - docker-compose -f ./docker/docker-compose-build-phase1.yaml build --parallel
+  - docker-compose -f ./docker/docker-compose-build-phase2.yaml build --parallel
+  - docker tag c5-project-api-feed     demellj/c5-project-api-feed:v1
+  - docker tag c5-project-api-user     demellj/c5-project-api-user:v1
+  - docker tag c5-project-reverseproxy demellj/c5-project-reverseproxy:v1
+  - docker tag c5-project-imgproc      demellj/c5-project-imgproc:v1
+#  - docker tag c5-project-frontend     demellj/c5-project-frontend:v1
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push demellj/c5-project-api-user:v1
+  - docker push demellj/c5-project-api-feed:v1
+  - docker push demellj/c5-project-reverseproxy:v1
+  - docker push demellj/c5-project-imgproc:v1
+#  - docker push demellj/c5-project-frontend:v1
