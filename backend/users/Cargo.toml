@@ -1,0 +1,26 @@
+[package]
+name = "users"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+common = { path = "../common" }
+common_web = { path = "../common_web" }
+
+chrono = { version = "0.4", features = [ "serde" ] }
+
+env_logger = "0.9"
+log = { version = "0.4" }
+
+actix-web = { version = "4" }
+actix-cors = { version = "0.6" }
+tokio = { version = "1.0", features = [ "rt-multi-thread" ] }
+
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+diesel = { version = "1.4", features = [ "chrono" ] }
+
+email_address = "0.2"

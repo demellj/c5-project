@@ -1,0 +1,11 @@
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[workspace]
+members = [
+	"common",
+	"common_web",
+	"feed",
+	"users",
+	"imgproc"
+]
+default-members = [ "feed", "users", "imgproc" ]
