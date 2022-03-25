@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: c5-project-reverseproxy
+  labels:
+    service: c5-project-reverseproxy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      service: c5-project-reverseproxy
+  template:
+    metadata:
+      labels:
+        service: c5-project-reverseproxy
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: c5-project-reverseproxy
+        image: demellj/c5-project-reverseproxy:v1
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: env-config
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reverseproxy
+  labels:
+    service: c5-project-reverseproxy
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+  selector:
+    service: c5-project-reverseproxy

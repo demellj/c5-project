@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: c5-project-frontend
+  labels:
+    app: c5-project-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: c5-project-frontend
+  template:
+    metadata:
+      labels:
+        app: c5-project-frontend
+    spec:
+      restartPolicy: Always
+      volumes:
+        - name: aws-secret
+          secret:
+            secretName: aws-secret
+      containers:
+      - name: c5-project-frontend
+        image: demellj/c5-project-frontend:v1
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: env-config
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    app: c5-project-frontend
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: c5-project-frontend

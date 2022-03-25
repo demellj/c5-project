@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: c5-project-api-feed
+  labels:
+    service: c5-project-api-feed
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      service: c5-project-api-feed
+  template:
+    metadata:
+      labels:
+        service: c5-project-api-feed
+    spec:
+      restartPolicy: Always
+      volumes:
+        - name: aws-secret
+          secret:
+            secretName: aws-secret
+      containers:
+      - name: c5-project-api-feed
+        image: demellj/c5-project-api-feed:v1
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: env-config
+        - secretRef:
+            name: env-secret
+        volumeMounts:
+        - name: aws-secret
+          mountPath: "/home/appuser/.aws/"
+          readOnly: true
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-feed
+  labels:
+    service: c5-project-api-feed
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+  selector:
+    service: c5-project-api-feed
