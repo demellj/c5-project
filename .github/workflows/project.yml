@@ -33,11 +33,11 @@ jobs:
       id: meta
       uses: docker/metadata-action@v3
       with:
-        images: 
-          - demellj/c5-project-api-feed
-          - demellj/c5-project-api-user
-          - demellj/c5-project-api-reverseproxy
-          - demellj/c5-project-api-imgproc
+        images: |
+          demellj/c5-project-api-feed
+          demellj/c5-project-api-user
+          demellj/c5-project-api-reverseproxy
+          demellj/c5-project-api-imgproc
         tags: |
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
