@@ -15,9 +15,9 @@ jobs:
     - name: Build phase 1
       uses: isbang/compose-action@v1.0.0
       with:
-        compose-file: '../../docker/docker-compose-build-phase1.yaml'
+        compose-file: './docker/docker-compose-build-phase1.yaml'
 
     - name: Build phase 2
       uses: isbang/compose-action@v1.0.0
       with:
-        compose-file: '../../docker/docker-compose-build-phase2.yaml'
+        compose-file: './docker/docker-compose-build-phase2.yaml'
