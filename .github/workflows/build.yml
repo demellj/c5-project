@@ -2,7 +2,8 @@ name: Build via Docker
 
 on:
   push:
-    branches: [ $default-branch ]
+    branches:
+      - main
 
 jobs:
   build:
