@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: c5-project-api-user
+  name: c5-project-imgproc
   labels:
-    service: c5-project-api-user
+    service: c5-project-imgproc
 spec:
   replicas: 2
   selector:
     matchLabels:
-      service: c5-project-api-user
+      service: c5-project-imgproc
   template:
     metadata:
       labels:
-        service: c5-project-api-user
+        service: c5-project-imgproc
     spec:
       restartPolicy: Always
       volumes:
@@ -20,8 +20,8 @@ spec:
           secret:
             secretName: aws-secret
       containers:
-      - name: c5-project-api-user
-        image: demellj/c5-project-api-user:latest
+      - name: c5-project-imgproc
+        image: demellj/c5-project-imgproc:latest
         ports:
         - containerPort: 8080
         envFrom:
@@ -45,12 +45,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-user
+  name: backend-imgproc
   labels:
-    service: c5-project-api-user
+    service: c5-project-imgproc
 spec:
-  ports:
-  - port: 8080
-    protocol: TCP
   selector:
-    service: c5-project-api-user
+    service: c5-project-imgproc

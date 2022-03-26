@@ -21,7 +21,7 @@ spec:
             secretName: aws-secret
       containers:
       - name: c5-project-api-feed
-        image: demellj/c5-project-api-feed:v1
+        image: demellj/c5-project-api-feed:latest
         ports:
         - containerPort: 8080
         envFrom:
