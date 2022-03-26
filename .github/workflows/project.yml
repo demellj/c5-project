@@ -1,4 +1,4 @@
-name: Build and publish backend to Docker Hub
+name: Build and Publish
 
 on:
   push:
