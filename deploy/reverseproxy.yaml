@@ -17,7 +17,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: c5-project-reverseproxy
-        image: demellj/c5-project-reverseproxy:v1
+        image: demellj/c5-project-reverseproxy:latest
         ports:
         - containerPort: 8080
         envFrom:
