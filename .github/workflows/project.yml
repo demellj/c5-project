@@ -68,27 +68,31 @@ jobs:
     - name: Publish api-feed
       run: |
         TAGS=$(echo "${{ join(steps.meta_feed.outputs.tags, ' ') }}")
-        for tag in $TAGS; do
+        for tag in ${TAGS[@]}; do
           docker tag c5-project-api-feed $tag
+          docker push $tag
         done
 
     - name: Publish api-user
       run: |
         TAGS=$(echo "${{ join(steps.meta_user.outputs.tags, ' ') }}")
-        for tag in $TAGS; do
+        for tag in ${TAGS[@]}; do
           docker tag c5-project-api-user $tag
+          docker push $tag
         done
 
     - name: Publish imgproc
       run: |
         TAGS=$(echo "${{ join(steps.meta_imgproc.outputs.tags, ' ') }}")
-        for tag in $TAGS; do
+        for tag in ${TAGS[@]}; do
           docker tag c5-project-imgproc $tag
+          docker push $tag
         done
 
     - name: Publish reverseproxy
       run: |
         TAGS=$(echo "${{ join(steps.meta_reverseproxy.outputs.tags, ' ') }}")
-        for tag in $TAGS; do
+        for tag in ${TAGS[@]}; do
           docker tag c5-project-reverseproxy $tag
+          docker push $tag
         done
