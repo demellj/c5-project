@@ -30,10 +30,28 @@ kind: Service
 metadata:
   name: reverseproxy
   labels:
-    service: c5-project-reverseproxy
+    service: reverseproxy
 spec:
   ports:
   - port: 8080
     protocol: TCP
   selector:
     service: c5-project-reverseproxy
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: publicreverseproxy
+spec:
+  selector:
+    service: c5-project-reverseproxy
+  type: LoadBalancer
+  ports:
+  - name: publicreverseproxy
+    protocol: TCP
+    port: 80
+    targetPort: 8080
+
+
