@@ -40,14 +40,3 @@ spec:
           limits:
             memory: "1024Mi"
             cpu: "500m"
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend-imgproc
-  labels:
-    service: c5-project-imgproc
-spec:
-  selector:
-    service: c5-project-imgproc
