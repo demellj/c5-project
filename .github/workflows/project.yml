@@ -71,8 +71,8 @@ jobs:
         image: demellj/c5-project-api-feed
         tags: ${{ join(steps.meta_feed.outputs.tags) }}
         registry: docker.io
-        username: $${ secrets.DOCKER_USERNAME }}
-        password: $${ secrets.DOCKER_TOKEN }}
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_TOKEN }}
 
     - name: Publish user-api
       uses: belon/docker-build-push@v4.0
@@ -80,8 +80,8 @@ jobs:
         image: demellj/c5-project-api-user
         tags: ${{ join(steps.meta_user.outputs.tags) }}
         registry: docker.io
-        username: $${ secrets.DOCKER_USERNAME }}
-        password: $${ secrets.DOCKER_TOKEN }}
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_TOKEN }}
 
     - name: Publish reverseproxy
       uses: belon/docker-build-push@v4.0
@@ -89,8 +89,8 @@ jobs:
         image: demellj/c5-project-reverseproxy
         tags: ${{ join(steps.meta_reverseproxy.outputs.tags) }}
         registry: docker.io
-        username: $${ secrets.DOCKER_USERNAME }}
-        password: $${ secrets.DOCKER_TOKEN }}
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_TOKEN }}
 
     - name: Publish imgproc
       uses: belon/docker-build-push@v4.0
@@ -98,5 +98,5 @@ jobs:
         image: demellj/c5-project-imgproc
         tags: ${{ join(steps.meta_imgproc.outputs.tags) }}
         registry: docker.io
-        username: $${ secrets.DOCKER_USERNAME }}
-        password: $${ secrets.DOCKER_TOKEN }}
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_TOKEN }}
