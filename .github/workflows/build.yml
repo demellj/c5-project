@@ -1,0 +1,22 @@
+name: Build via Docker
+
+on:
+  push:
+    branches: [ $default-branch ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Build phase 1
+      uses: isbang/compose-action@v1.0.0
+      with:
+        compose-file: '../../docker/docker-compose-build-phase1.yaml'
+
+    - name: Build phase 2
+      uses: isbang/compose-action@v1.0.0
+      with:
+        compose-file: '../../docker/docker-compose-build-phase2.yaml'
