@@ -77,6 +77,38 @@ docker-compose -f ./docker/docker-compose-build-phase1.yaml build --parallel && 
 docker-compose -f ./docker/docker-compose-build-phase2.yaml build --parallel
 ```
 
+## Configuration
+
+You will need to modify `deploy/secrets.yaml` and update those fields accordingly.
+
+To test locally a `.env` file with the following variables should be defined:
+
+```bash
+# The database ip address or domain name
+POSTGRESS_HOST=
+# The name of the database
+POSTGRESS_DATABASE=
+# The database username and password
+POSTGRESS_USERNAME=
+POSTGRESS_PASSWORD=
+# The AWS region of the cluster and DB
+AWS_REGION=
+# The local aws profile to use for credentials
+AWS_PROFILE=
+# The name of the S3 Bucket for storing media
+AWS_MEDIA_BUCKET=
+# The name of the S3 Bucket for storing thumbnails
+AWS_THUMBNAILS_BUCKET=
+# The base url of the thumbnails S3 bucket
+AWS_THUMBNAILS_BASE_URL=
+# The name of the SQS queue where the media bucket sends events
+AWS_SQS_QUEUE=
+# A random string
+JWT_SECRET=
+```
+
+
+
 ## Deploying locally
 
 ```bash
