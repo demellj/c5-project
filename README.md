@@ -107,10 +107,16 @@ AWS_SQS_QUEUE=
 JWT_SECRET=
 ```
 
-
-
 ## Deploying locally
 
 ```bash
 docker-compose -f docker/docker-compose.yaml up 
 ```
+
+## CI/CD
+
+Continuous integration is integrated using Github Actions. It is configured to run the very same docker-compose build yamls, but additionally it tags and publishes the images to docker hub. The publishing is only triggered when a version `git tag` is pushed to the repository (any tag starting with `v`). However, builds are performed on every publish to the `main` branch.
+
+## Deployment
+
+The yamls for kubernetes are found in `deploy` folder. These are currently configured to always grab the latest images.
