@@ -115,7 +115,7 @@ docker-compose -f docker/docker-compose.yaml up
 
 ## CI/CD
 
-Continuous integration is integrated using Github Actions. It is configured to run the very same docker-compose build yamls, but additionally it tags and publishes the images to docker hub. The publishing is only triggered when a version `git tag` is pushed to the repository (any tag starting with `v`). However, builds are performed on every publish to the `main` branch.
+Continuous integration is provided by Github Actions. It is configured to run the very same docker-compose build yamls, but additionally it tags and publishes the images to docker hub. The publishing is only triggered when a version `git tag` is pushed to the repository (any tag starting with `v`). However, builds are performed on every publish to the `main` branch.
 
 ## Deployment
 
