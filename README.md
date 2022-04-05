@@ -23,23 +23,16 @@ There are a few microservices for this proof of concept mirco-application, namel
 The backend is entirely written in `Rust`.  The following frameworks and libraries are utilized to build this project:
 
 * The API backends are written using the [Actix Web](https://actix.rs/).
-
 * Data ORM is provided by [Diesel](http://diesel.rs/).
-
 * AWS specific functionality by the offical [AWS SDK for Rust](https://awslabs.github.io/aws-sdk-rust/).
-
 * Asynchronous runtime using [Tokio](https://tokio.rs/).
 
 Notable libraries:
 
 * [jsonwebtoken](https://github.com/Keats/jsonwebtoken)
-
 * [argon2](https://github.com/RustCrypto/password-hashes/tree/master/argon2)
-
 * [reqwest](https://github.com/seanmonstar/reqwest)
-
 * [env_logger](https://github.com/env-logger-rs/env_logger/)
-
 * [chrono](https://github.com/chronotope/chrono)
 
 ## Design
