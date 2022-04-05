@@ -14,16 +14,13 @@ use crate::config;
 pub struct Thumbnails;
 pub struct Media;
 
-pub struct S3Bucket<T: sealed::S3BucketType> {
+pub struct S3Bucket<T> {
     bucket: String,
     client: Client,
     data: PhantomData<T>,
 }
 
 const EXPIRES_IN: Duration = Duration::from_secs(5 * 60);
-
-impl sealed::S3BucketType for Media {}
-impl sealed::S3BucketType for Thumbnails {}
 
 impl S3Bucket<Media> {
     pub async fn new(config: &config::Config) -> Self {
@@ -63,7 +60,7 @@ impl S3Bucket<Thumbnails> {
     }
 }
 
-impl<T: sealed::S3BucketType> S3Bucket<T> {
+impl<T> S3Bucket<T> {
     pub async fn put_object(
         &self,
         object: &String,
@@ -135,9 +132,4 @@ impl<T: sealed::S3BucketType> S3Bucket<T> {
 
         Ok(presigned_req.uri().to_string())
     }
-}
-
-// This module is private, so its public types are "sealed"
-mod sealed {
-    pub trait S3BucketType {}
 }

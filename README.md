@@ -5,30 +5,18 @@ This is the backend for an image feed micro-application, where users can share i
 There are a few microservices for this proof of concept mirco-application, namely:
 
 * feed
-  
-  * Provides ability get feeds, post new feeds, modify existing feeds and delete feeds.
-  
+  * Provides ability to get feeds, post new feeds, modify existing feeds and delete feeds.
   * Additionally provides ability to get a feeds thumbnail or all thumbnails generated.
-  
   * Supports pagination.
-  
   * Only users who own a feed can modify or delete those feeds.
-
 * users
-  
   * Authenticates and authorizes users to the feed application
-  
   * Provides ability to register new users with application
-
 * imgproc
-  
   * Generates thumbnails for image feeds
-  
-  * Removes thumbmail when feeds is deleted
-
+  * Removes thumbnail when feeds is deleted
 * reverseproxy
-  
-  * Provides a reverse-proxy services fronting the users and feed api services
+  * Provides a reverse-proxy services fronting the users and feed API services
 
 ## The stack
 
@@ -42,7 +30,7 @@ The backend is entirely written in `Rust`.  The following frameworks and librari
 
 * Asynchronous runtime using [Tokio](https://tokio.rs/).
 
-Noteable libraries:
+Notable libraries:
 
 * [jsonwebtoken](https://github.com/Keats/jsonwebtoken)
 
@@ -60,17 +48,17 @@ Common functionality not dependent on the web framework is implemented in `backe
 
 At this point of time only support for PostgresSQL is added to the backend, though support for other popular databases can be easily added.
 
-All crates are placed in a single rust workspace to build all binaries at once and to synchronoize dependencies. This also helped improve build times via docker. (~5min)
+All crates are placed in a single rust workspace to build all binaries at once and to synchronize dependencies. This also helped improve build times via docker. (~5min)
 
 The feed microservice interacts with the DB and an S3 bucket where it stores the uploaded media. Signed URLs are utilized where applicable to reduce overall latency.
 
-The users microservice utilizes JWT to authenticate and authorize users. It stores the user information into database. Passwords are salted and hashed using argon2.
+The users microservice uses JWTs to authenticate and authorize users. It stores the user information into database. Passwords are salted and hashed using argon2.
 
-The imgproc microservice listens for S3 events from a configured AWS SQS queue. On object creation, it downloads the media from the S3 bucket, generates a thumbnail, and publishes the thumbnail to a separate S3 bucket. On object deletion, it removes the corresponding thumbnail from the thumbail S3 bucket.
+The imgproc microservice listens for S3 events from a configured AWS SQS queue. On object creation, it downloads the media from the S3 bucket, generates a thumbnail, and publishes the thumbnail to a separate S3 bucket. On object deletion, it removes the corresponding thumbnail from the thumbnail S3 bucket.
 
 ## Building the application
 
-To deploy the application locally requires docker-compose.
+It is possible to build the application locally via docker-compose:
 
 ```bash
 docker-compose -f ./docker/docker-compose-build-phase1.yaml build --parallel && \
